@@ -1,0 +1,706 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Barbershop à Alger-Centre : dégradés, barbe taillée, rasage à la serviette chaude. Essayez votre coupe et réservez votre fauteuil sur WhatsApp.">
+<link rel="icon" href="favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Barber 16 · Barbershop à Alger-Centre">
+<meta property="og:description" content="Barbershop à Alger-Centre : dégradés, barbe taillée, rasage à la serviette chaude. Essayez votre coupe et réservez votre fauteuil sur WhatsApp.">
+<meta property="og:image" content="https://barber-16.vercel.app/preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://barber-16.vercel.app/">
+<meta property="og:locale" content="fr_DZ">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#123B2E">
+<style>[hidden]{display:none!important}body{margin:0}img{max-width:100%}</style>
+<title>Barber 16</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Barlow:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Reem+Kufi:wght@600;700&display=swap">
+<style>
+/* Layout: same bold poster family as Atlas Iron (square edges, hard shadows, mono labels) but warm: cream paper, bottle-green leather, barber red, brass. Signature: spinning pole, menu board, printed ticket. Single committed light look. */
+:root{
+  --cream:#F3EADB; --ink:#16130F; --green:#123B2E; --green-2:#1C5140; --red:#D2382A; --brass:#C9A24D; --grey:#6F675B; --soft:#E7DCC8; --paper:#FBF6EC;
+  --f-disp:"Big Shoulders Display", "Arial Narrow", "Impact", sans-serif;
+  --f-body:"Barlow", "Arial", system-ui, sans-serif;
+  --f-mono:"Space Mono", ui-monospace, "Courier New", monospace;
+  --f-ar:"Reem Kufi", "Noto Kufi Arabic", system-ui, sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html.lenis,html.lenis body{height:auto}
+.lenis:not(.lenis-autoToggle).lenis-stopped{overflow:clip}
+.lenis [data-lenis-prevent]{overscroll-behavior:contain}
+body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.5 var(--f-body);padding-inline:16px;padding-block:0;overflow-x:clip;
+  background-image:repeating-linear-gradient(0deg,rgba(18,59,46,.06) 0 1px,transparent 1px 34px)}
+.wrap{max-width:1180px;margin-inline:auto}
+a{color:inherit}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.mono{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:2px solid var(--ink);padding:14px 22px;font-family:var(--f-mono);font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;cursor:pointer;background:var(--red);color:var(--cream);box-shadow:5px 5px 0 var(--ink);transition:transform .12s,box-shadow .12s;white-space:nowrap}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink)}
+.btn:active{transform:translate(5px,5px);box-shadow:0 0 0 var(--ink)}
+.btn.green{background:var(--green);color:var(--cream)}
+.btn.light{background:var(--paper);color:var(--ink)}
+.btn.wa{background:#1FA855;color:#fff}
+.btn .arr{transition:transform .2s}
+.btn:hover .arr{transform:translateX(4px)}
+
+/* Pole stripes (shared) */
+.stripes{background:repeating-linear-gradient(-45deg,var(--red) 0 16px,var(--paper) 16px 32px,var(--green) 32px 48px,var(--paper) 48px 64px);animation:poleMove 1.6s linear infinite}
+@keyframes poleMove{to{background-position:0 90.51px}}
+
+/* Nav */
+nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;margin-inline:-16px;background:var(--cream);border-bottom:2px solid var(--ink)}
+nav.top .in{max-width:1180px;margin-inline:auto;padding:0 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;height:64px}
+nav.top .band{height:8px;border-top:2px solid var(--ink)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo .mk{width:16px;height:40px;border:2px solid var(--ink);position:relative}
+.logo .mk::before,.logo .mk::after{content:"";position:absolute;left:-5px;right:-5px;height:6px;background:var(--brass);border:2px solid var(--ink)}
+.logo .mk::before{top:-7px}.logo .mk::after{bottom:-7px}
+.logo b{font-family:var(--f-disp);font-weight:900;font-size:1.7rem;letter-spacing:.02em;line-height:1;white-space:nowrap}
+.logo b span{color:var(--red)}
+.links{display:flex;gap:22px}
+.links a{text-decoration:none;font-family:var(--f-mono);font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;position:relative}
+.links a::after{content:"";position:absolute;left:0;right:100%;bottom:-4px;height:2px;background:var(--red);transition:right .25s}
+.links a:hover::after{right:0}
+@media (max-width:860px){.links{display:none}}
+nav.top .btn{padding:10px 14px;box-shadow:3px 3px 0 var(--ink)}
+@media (max-width:520px){nav.top .in{height:58px}nav.top .btn{padding:8px 10px;font-size:.7rem}.logo b{font-size:1.45rem}}
+
+/* Hero */
+.hero{margin-inline:-16px;border-bottom:2px solid var(--ink);display:grid;grid-template-columns:minmax(0,1fr)}
+@media (min-width:960px){.hero{grid-template-columns:minmax(0,1.5fr) 96px minmax(0,1fr)}}
+.hcopy{padding:34px 16px 30px;display:grid;gap:18px;align-content:start;min-width:0}
+@media (min-width:960px){.hcopy{padding:52px 30px 44px 16px}}
+.kick{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.kick .tag{border:2px solid var(--ink);padding:4px 8px;background:var(--paper)}
+h1{font-family:var(--f-disp);font-weight:900;margin:0;font-size:clamp(3.4rem,13vw,6.8rem);line-height:.86;text-transform:uppercase;letter-spacing:-.005em}
+h1 .ln{display:block;overflow:hidden;padding-bottom:.05em}
+h1 .ln>span{display:inline-block;animation:up .85s cubic-bezier(.2,.8,.1,1) both}
+h1 .ln:nth-child(2)>span{animation-delay:.08s}
+h1 .ln:nth-child(3)>span{animation-delay:.16s}
+h1 .ln:nth-child(4)>span{animation-delay:.24s}
+h1 .ln:nth-child(4){padding-top:.04em}
+h1 .out{color:transparent;-webkit-text-stroke:2px var(--ink)}
+h1 .rd{position:relative;z-index:0;color:var(--cream);padding-inline:.08em}
+h1 .rd::before{content:"";position:absolute;inset:.06em 0 .02em;background:var(--red);z-index:-1;transform-origin:left;animation:wipe .6s .75s cubic-bezier(.7,0,.2,1) both}
+.ar{font-family:var(--f-ar);direction:rtl;text-align:left;font-size:1.4rem;color:var(--green)}
+.lead{margin:0;max-width:44ch;font-size:1.1rem}
+.ctas{display:flex;flex-wrap:wrap;gap:14px}
+.perks{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:4px}
+.perks span{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.04em;text-transform:uppercase}
+.perks span::before{content:"✂ ";color:var(--red)}
+
+.polecol{display:none;border-left:2px solid var(--ink);border-right:2px solid var(--ink);background:var(--green);padding:26px 18px;justify-content:center}
+@media (min-width:960px){.polecol{display:flex}}
+.pole{position:relative;width:56px;height:100%;min-height:420px}
+.pole .glass{position:absolute;inset:18px 6px;border:2px solid var(--ink);overflow:hidden}
+.pole .glass .stripes{position:absolute;inset:0}
+.pole .glass::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.28),transparent 32%,rgba(255,255,255,.55) 44%,transparent 58%,rgba(0,0,0,.32))}
+.pole .cap{position:absolute;left:0;right:0;height:20px;background:var(--brass);border:2px solid var(--ink)}
+.pole .cap.t{top:0}.pole .cap.b{bottom:0}
+.pole .cap::after{content:"";position:absolute;left:50%;width:14px;height:14px;transform:translateX(-50%);background:var(--brass);border:2px solid var(--ink);border-radius:50%}
+.pole .cap.t::after{top:-14px}.pole .cap.b::after{bottom:-14px}
+
+.hside{padding:26px 16px;display:grid;gap:16px;align-content:start;background:var(--paper);min-width:0;border-top:2px solid var(--ink)}
+@media (min-width:960px){.hside{padding:40px 26px;border-top:0}}
+.live{display:inline-flex;align-items:center;gap:8px}
+.live i{width:9px;height:9px;background:#2C9A5E;animation:blink 1.2s steps(2) infinite}
+.live.closed i{background:var(--red);animation:none}
+.slotcard{border:2px solid var(--ink);background:var(--green);color:var(--cream);box-shadow:6px 6px 0 var(--ink);padding:16px;display:grid;gap:6px}
+.slotcard .mono{color:#BFD3C8}
+.slotcard b{font-family:var(--f-disp);font-weight:900;font-size:clamp(3rem,10vw,4.2rem);line-height:.9;color:var(--brass);font-variant-numeric:tabular-nums}
+.slotcard span{font-family:var(--f-mono);font-size:.84rem}
+.chairs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:2px solid var(--ink)}
+.chair{padding:10px;border-right:2px solid var(--ink);display:grid;gap:2px;background:var(--paper)}
+.chair:last-child{border-right:0}
+.chair b{font-family:var(--f-disp);font-weight:800;font-size:1.25rem;line-height:1;text-transform:uppercase}
+.chair span{font-family:var(--f-mono);font-size:.64rem;letter-spacing:.04em;text-transform:uppercase}
+.chair .st{display:inline-block;width:8px;height:8px;margin-right:6px;background:#2C9A5E}
+.chair.busy .st{background:var(--red)}
+.hpole{height:26px;border-bottom:2px solid var(--ink)}
+@media (min-width:960px){.hpole{display:none}}
+
+/* Ticker */
+.ticker{margin-inline:-16px;background:var(--red);color:var(--cream);border-bottom:2px solid var(--ink);overflow:hidden;padding:14px 0}
+.ticker .tr{display:flex;width:max-content;animation:slide 32s linear infinite}
+.ticker span{font-family:var(--f-disp);font-weight:900;font-size:2.1rem;line-height:1;text-transform:uppercase;white-space:nowrap;padding-right:28px;letter-spacing:.02em}
+.ticker span::after{content:"✂";margin-left:28px;font-size:.75em;color:var(--ink)}
+
+/* Section header */
+section.blk{padding-block:60px 6px;scroll-margin-top:84px}
+.sh{display:grid;gap:10px;margin-bottom:26px}
+.sh .mono{display:flex;gap:10px;align-items:center;color:var(--green)}
+.sh .mono::before{content:"";width:28px;height:2px;background:var(--red)}
+.sh h2{font-family:var(--f-disp);font-weight:900;margin:0;font-size:clamp(3rem,11vw,6.4rem);line-height:.86;text-transform:uppercase}
+.sh h2 .out{color:transparent;-webkit-text-stroke:2px var(--ink)}
+.sh p{margin:0;max-width:58ch;color:#4A433A}
+
+/* Menu board */
+.board{background:var(--green);color:var(--cream);border:2px solid var(--ink);box-shadow:8px 8px 0 var(--ink);position:relative;overflow:hidden}
+.board::before{content:"";position:absolute;inset:10px;border:1px solid rgba(201,162,77,.55);pointer-events:none}
+.board .hd{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 22px;border-bottom:1px solid rgba(201,162,77,.55);flex-wrap:wrap}
+.board .hd b{font-family:var(--f-disp);font-weight:900;font-size:1.6rem;letter-spacing:.06em;color:var(--brass)}
+.board .hd span{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;color:#BFD3C8}
+.grps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))}
+.grp{padding:20px 22px 24px;min-width:0}
+.grp+.grp{border-left:1px solid rgba(201,162,77,.35)}
+@media (max-width:700px){.grp+.grp{border-left:0;border-top:1px solid rgba(201,162,77,.35)}}
+.grp h3{margin:0 0 12px;font-family:var(--f-disp);font-weight:900;font-size:1.9rem;letter-spacing:.04em;color:#FF8A7A;text-transform:uppercase}
+.it{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;padding:10px 0;border-bottom:1px dashed rgba(243,234,219,.18);align-items:center}
+.it .nm{display:flex;align-items:baseline;gap:8px;min-width:0}
+.it .nm b{font-weight:600;font-size:1.05rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.it .nm::after{content:"";flex:1;min-width:16px;border-bottom:2px dotted rgba(243,234,219,.4);transform:translateY(-4px)}
+.it .pr{font-family:var(--f-disp);font-weight:800;font-size:1.45rem;color:var(--brass);font-variant-numeric:tabular-nums;white-space:nowrap}
+.it .pr small{font-size:.6em;margin-left:2px}
+.it .ds{grid-column:1/2;font-size:.85rem;color:#BFD3C8}
+.it .ds em{font-style:normal;font-family:var(--f-mono);font-size:.72rem}
+.it .add{grid-column:2;grid-row:2;justify-self:end;border:2px solid var(--cream);background:transparent;color:var(--cream);font-family:var(--f-mono);font-size:.68rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:4px 8px;cursor:pointer;transition:background .2s,color .2s}
+.it .add:hover{background:var(--cream);color:var(--green)}
+.it .add[aria-pressed="true"]{background:var(--brass);border-color:var(--brass);color:var(--ink)}
+.it .save{display:inline-block;margin-left:6px;background:var(--red);color:var(--cream);font-family:var(--f-mono);font-size:.62rem;padding:1px 5px;vertical-align:middle}
+
+/* Style studio */
+.studio{display:grid;grid-template-columns:minmax(0,1fr);border:2px solid var(--ink);background:var(--paper);box-shadow:8px 8px 0 var(--ink)}
+@media (min-width:900px){.studio{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.ba{position:relative;aspect-ratio:1/1.05;max-width:100%;overflow:hidden;background:var(--soft);border-bottom:2px solid var(--ink);touch-action:pan-y}
+@media (min-width:900px){.ba{border-bottom:0;border-right:2px solid var(--ink)}}
+.ba .layer{position:absolute;inset:0}
+.ba .layer svg{width:100%;height:100%;display:block}
+.ba .before{clip-path:inset(0 calc(100% - var(--x,50%)) 0 0)}
+.ba .bg{position:absolute;inset:0;background:radial-gradient(circle at 50% 42%,var(--paper) 0 34%,transparent 34.2%),repeating-linear-gradient(-45deg,rgba(210,56,42,.10) 0 14px,transparent 14px 28px)}
+.ba .line{position:absolute;top:0;bottom:0;left:var(--x,50%);width:3px;background:var(--ink);transform:translateX(-50%);pointer-events:none}
+.ba .knob{position:absolute;top:86%;left:var(--x,50%);width:52px;height:52px;transform:translate(-50%,-50%);background:var(--red);border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);display:grid;place-items:center;color:var(--cream);font-family:var(--f-mono);font-weight:700;font-size:1.1rem;pointer-events:none}
+.ba .lab{position:absolute;top:14px;font-family:var(--f-mono);font-size:.72rem;font-weight:700;letter-spacing:.08em;background:var(--ink);color:var(--cream);padding:4px 8px;pointer-events:none}
+.ba .lab.l{left:14px}.ba .lab.r{right:14px;background:var(--red)}
+.ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+.ba input:focus-visible~.knob{outline:3px solid var(--red);outline-offset:3px}
+.ctrl{padding:20px 16px;display:grid;gap:20px;align-content:start;min-width:0}
+@media (min-width:900px){.ctrl{padding:28px}}
+.lbl{font-family:var(--f-mono);font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;display:block}
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
+.opts button{border:2px solid var(--ink);background:var(--cream);padding:10px 10px;text-align:left;cursor:pointer;display:grid;gap:2px;transition:transform .12s,box-shadow .12s,background .2s}
+.opts button b{font-family:var(--f-disp);font-weight:800;font-size:1.25rem;line-height:1;text-transform:uppercase}
+.opts button span{font-size:.78rem;color:var(--grey)}
+.opts button:hover{transform:translate(-2px,-2px);box-shadow:3px 3px 0 var(--ink)}
+.opts button[aria-pressed="true"]{background:var(--green);color:var(--cream)}
+.opts button[aria-pressed="true"] span{color:#BFD3C8}
+.look{border:2px dashed var(--ink);padding:14px;display:grid;gap:4px;background:var(--cream)}
+.look b{font-family:var(--f-disp);font-weight:900;font-size:1.7rem;line-height:1;text-transform:uppercase}
+.look span{font-family:var(--f-mono);font-size:.78rem}
+
+/* Barbers */
+.barbers{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.bcard{border:2px solid var(--ink);background:var(--paper);box-shadow:6px 6px 0 var(--ink);display:grid;transition:transform .15s,box-shadow .15s;min-width:0}
+.bcard:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--ink)}
+.bcard .top{height:12px;border-bottom:2px solid var(--ink)}
+.bcard .mg{display:flex;align-items:flex-end;justify-content:space-between;padding:16px 16px 0}
+.bcard .mg b{font-family:var(--f-disp);font-weight:900;font-size:6rem;line-height:.8;color:var(--green)}
+.bcard .mg span{font-family:var(--f-mono);font-size:.7rem;text-align:right;letter-spacing:.04em}
+.bcard .tx{padding:12px 16px 16px;display:grid;gap:6px}
+.bcard h3{margin:0;font-family:var(--f-disp);font-weight:900;font-size:2rem;line-height:1;text-transform:uppercase}
+.bcard p{margin:0;font-size:.92rem;color:#4A433A}
+.bcard .sk{display:flex;flex-wrap:wrap;gap:6px}
+.bcard .sk span{border:1px solid var(--ink);font-family:var(--f-mono);font-size:.66rem;letter-spacing:.04em;text-transform:uppercase;padding:2px 6px}
+.bcard .btn{margin-top:6px;justify-self:start;padding:9px 14px;box-shadow:3px 3px 0 var(--ink)}
+
+/* Booking */
+.book{display:grid;grid-template-columns:minmax(0,1fr);gap:22px;align-items:start}
+@media (min-width:980px){.book{grid-template-columns:minmax(0,1.35fr) minmax(0,.85fr)}}
+.steps{border:2px solid var(--ink);background:var(--paper);display:grid}
+.step{padding:18px 16px;border-bottom:2px solid var(--ink);min-width:0}
+.step:last-child{border-bottom:0}
+@media (min-width:600px){.step{padding:20px 22px}}
+.step h3{margin:0 0 12px;display:flex;align-items:center;gap:10px;font-family:var(--f-disp);font-weight:900;font-size:1.5rem;text-transform:uppercase;letter-spacing:.02em}
+.step h3 i{font-style:normal;width:30px;height:30px;background:var(--ink);color:var(--cream);display:grid;place-items:center;font-family:var(--f-mono);font-size:.8rem}
+.step.ok h3 i{background:var(--green)}
+.svcs{display:flex;flex-wrap:wrap;gap:8px}
+.svcs button{border:2px solid var(--ink);background:var(--cream);padding:8px 10px;cursor:pointer;font-weight:600;font-size:.9rem;display:inline-flex;gap:8px;align-items:baseline}
+.svcs button small{font-family:var(--f-mono);font-size:.7rem;color:var(--grey)}
+.svcs button[aria-pressed="true"]{background:var(--green);color:var(--cream)}
+.svcs button[aria-pressed="true"] small{color:#BFD3C8}
+.who{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:2px solid var(--ink)}
+.who button{border:0;border-right:2px solid var(--ink);background:var(--cream);padding:12px 6px;cursor:pointer;display:grid;gap:2px;justify-items:center;text-align:center}
+.who button:last-child{border-right:0}
+.who b{font-family:var(--f-disp);font-weight:900;font-size:1.35rem;line-height:1;text-transform:uppercase}
+.who span{font-family:var(--f-mono);font-size:.6rem;letter-spacing:.03em;text-transform:uppercase;color:var(--grey)}
+.who button[aria-pressed="true"]{background:var(--red);color:var(--cream)}
+.who button[aria-pressed="true"] span{color:#FFE2DC}
+@media (max-width:480px){.who{grid-template-columns:repeat(2,minmax(0,1fr))}.who button:nth-child(2){border-right:0}.who button:nth-child(-n+2){border-bottom:2px solid var(--ink)}}
+.days{display:flex;gap:0;overflow-x:auto;border:2px solid var(--ink);scrollbar-width:none}
+.days::-webkit-scrollbar{display:none}
+.days button{flex:1 0 74px;border:0;border-right:2px solid var(--ink);background:var(--cream);padding:8px 4px;cursor:pointer;display:grid;justify-items:center;gap:0}
+.days button:last-child{border-right:0}
+.days small{font-family:var(--f-mono);font-size:.62rem;letter-spacing:.06em;text-transform:uppercase}
+.days b{font-family:var(--f-disp);font-weight:900;font-size:1.9rem;line-height:1}
+.days span{font-family:var(--f-mono);font-size:.6rem;color:var(--grey)}
+.days button[aria-pressed="true"]{background:var(--ink);color:var(--cream)}
+.days button[aria-pressed="true"] span{color:var(--brass)}
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(74px,1fr));gap:6px}
+.slots button{border:2px solid var(--ink);background:var(--cream);padding:9px 0;cursor:pointer;font-family:var(--f-mono);font-weight:700;font-size:.86rem;font-variant-numeric:tabular-nums;transition:transform .1s}
+.slots button:hover:not(:disabled){transform:translate(-2px,-2px);box-shadow:3px 3px 0 var(--ink)}
+.slots button:disabled{background:transparent;color:#B5AB9A;border-color:#CFC3AE;text-decoration:line-through;cursor:not-allowed}
+.slots button[aria-pressed="true"]{background:var(--red);color:var(--cream)}
+.hint{font-family:var(--f-mono);font-size:.72rem;color:var(--grey);margin:8px 0 0}
+.fg{display:grid;gap:12px;grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:520px){.fg{grid-template-columns:minmax(0,1fr)}}
+.field{display:grid;gap:6px;min-width:0}
+.field span{font-family:var(--f-mono);font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.field input{width:100%;border:2px solid var(--ink);background:var(--cream);padding:12px;border-radius:0}
+.field input:focus{outline:none;background:#fff;box-shadow:4px 4px 0 var(--ink)}
+
+/* Ticket */
+.ticket{position:sticky;top:96px}
+.tkw{filter:drop-shadow(6px 6px 0 var(--ink))}
+.tk{background:var(--paper);color:var(--ink);padding:22px 20px 18px;font-family:var(--f-mono);font-size:.82rem;
+  -webkit-mask:radial-gradient(circle 7px at 50% 0,transparent 98%,#000) 0 0/18px 51% repeat-x,radial-gradient(circle 7px at 50% 100%,transparent 98%,#000) 0 100%/18px 51% repeat-x;
+  mask:radial-gradient(circle 7px at 50% 0,transparent 98%,#000) 0 0/18px 51% repeat-x,radial-gradient(circle 7px at 50% 100%,transparent 98%,#000) 0 100%/18px 51% repeat-x}
+.tk .h{text-align:center;display:grid;gap:2px;padding-bottom:12px;border-bottom:2px dashed var(--ink)}
+.tk .h b{font-family:var(--f-disp);font-weight:900;font-size:2rem;letter-spacing:.04em;line-height:1}
+.tk .h b span{color:var(--red)}
+.tk .no{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px dashed var(--ink)}
+.tk .no b{font-size:1rem}
+.tk ul{list-style:none;margin:0;padding:10px 0;display:grid;gap:6px;border-bottom:1px dashed var(--ink)}
+.tk li{display:flex;justify-content:space-between;gap:10px}
+.tk li span:first-child{min-width:0}
+.tk .meta{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;padding:10px 0;border-bottom:1px dashed var(--ink)}
+.tk .meta dt{color:var(--grey)}
+.tk .meta dd{margin:0;text-align:right;font-weight:700}
+.tk .tot{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0 6px}
+.tk .tot b{font-family:var(--f-disp);font-weight:900;font-size:2.6rem;line-height:1;font-variant-numeric:tabular-nums}
+.tk .bars{height:46px;margin-top:6px;background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 4px,var(--ink) 4px 7px,transparent 7px 9px,var(--ink) 9px 10px,transparent 10px 14px)}
+.tk .empty{color:var(--grey);padding:10px 0}
+.tk.print{animation:print .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes print{from{transform:translateY(-10px);clip-path:inset(0 0 100% 0)}to{transform:none;clip-path:inset(0 0 0 0)}}
+.ticket .act{margin-top:16px;display:grid;gap:10px}
+.ticket .act .btn{width:100%}
+.err{color:var(--red);font-weight:700;margin:0;font-size:.9rem;font-family:var(--f-body)}
+.small{font-size:.82rem;color:#4A433A;margin:0;font-family:var(--f-body)}
+@media (max-width:979px){.ticket{position:static}}
+
+/* Salon info */
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));border:2px solid var(--ink);background:var(--paper)}
+.info>div{padding:20px 16px;border-right:2px solid var(--ink);min-width:0}
+.info>div:last-child{border-right:0}
+@media (max-width:640px){.info>div{border-right:0;border-bottom:2px solid var(--ink)}.info>div:last-child{border-bottom:0}}
+.info h3{margin:0 0 12px;font-family:var(--f-disp);font-weight:900;font-size:1.9rem;text-transform:uppercase}
+.info p{margin:0 0 10px}
+table.hrs{width:100%;border-collapse:collapse;font-family:var(--f-mono);font-size:.8rem;font-variant-numeric:tabular-nums}
+table.hrs td{padding:8px 0;border-bottom:1px dashed var(--ink)}
+table.hrs td:last-child{text-align:right}
+table.hrs tr.today td{font-weight:700;color:var(--red)}
+.rules{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.rules li{display:flex;gap:10px;align-items:flex-start}
+.rules li::before{content:"✂";color:var(--red);font-weight:700}
+.faq{border-top:2px solid var(--ink)}
+.faq details{border-bottom:1px solid var(--ink)}
+.faq summary{list-style:none;cursor:pointer;padding:18px 4px;display:flex;justify-content:space-between;gap:14px;align-items:center;font-weight:700;font-size:1.05rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--f-disp);font-weight:900;font-size:1.8rem;line-height:1;width:40px;height:40px;border:2px solid var(--ink);display:grid;place-items:center;flex:none;transition:transform .25s,background .25s,color .25s}
+.faq details[open] summary::after{transform:rotate(45deg);background:var(--red);color:var(--cream)}
+.faq details p{margin:0 4px 18px;max-width:64ch;color:#4A433A}
+
+footer{margin-inline:-16px;margin-top:76px;background:var(--green);color:var(--cream);border-top:2px solid var(--ink);overflow:hidden}
+footer .band{height:14px;border-bottom:2px solid var(--ink)}
+.giant{font-family:var(--f-disp);font-weight:900;font-size:clamp(4rem,21vw,19rem);white-space:nowrap;line-height:.78;text-transform:uppercase;text-align:center;color:var(--cream);padding:30px 16px 6px;letter-spacing:-.01em}
+.giant span{color:var(--red);-webkit-text-stroke:3px var(--ink)}
+.fbar{border-top:1px solid rgba(243,234,219,.25);padding:16px}
+.fbar .in{max-width:1180px;margin-inline:auto;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.05em;text-transform:uppercase}
+.fbar b{color:var(--brass)}
+
+/* Motion */
+@keyframes up{from{transform:translateY(105%)}to{transform:none}}
+@keyframes wipe{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes blink{50%{opacity:0}}
+@keyframes slide{to{transform:translateX(-50%)}}
+@keyframes rise{from{transform:translateY(24px);opacity:0}to{transform:none;opacity:1}}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.08)}100%{transform:scale(1)}}
+.pop{animation:pop .3s ease}
+.svgfade{animation:svgIn .35s ease}
+@keyframes svgIn{from{opacity:.4;transform:scale(.985)}to{opacity:1;transform:none}}
+@supports (animation-timeline: view()){
+  .sh h2,.bcard,.it,.board,.studio,.steps{animation:rise linear both;animation-timeline:view();animation-range:entry 0% entry 55%}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+
+<nav class="top" aria-label="Navigation">
+  <div class="in">
+    <a class="logo" href="#"><span class="mk stripes" aria-hidden="true"></span><b>BARBER <span>16</span></b></a>
+    <div class="links"><a href="#carte">La carte</a><a href="#studio">Essayer une coupe</a><a href="#barbiers">Barbiers</a><a href="#reserver">Réserver</a></div>
+    <a class="btn" href="#reserver">Réserver</a>
+  </div>
+  <div class="band stripes" aria-hidden="true"></div>
+</nav>
+
+<header class="hero">
+  <div class="hcopy">
+    <div class="kick mono"><span class="tag">Barbershop</span><span>Alger-Centre · depuis 1998</span></div>
+    <h1><span class="ln"><span>Pas de file</span></span><span class="ln"><span class="out">d'attente.</span></span><span class="ln"><span>Juste la</span></span><span class="ln"><span class="rd">coupe.</span></span></h1>
+    <div class="ar">حجز بلاصتك، وأرواح طول للكرسي</div>
+    <p class="lead">Réservez votre fauteuil en 1 minute, arrivez à l'heure, repartez net. Dégradés, barbe taillée et rasage à la serviette chaude.</p>
+    <div class="ctas"><a class="btn" href="#reserver">Réserver mon fauteuil <span class="arr">→</span></a><a class="btn light" href="#studio">Essayer une coupe</a></div>
+    <div class="perks"><span>Café offert</span><span>Clim</span><span>Wifi</span><span>Paiement CIB / Edahabia</span></div>
+  </div>
+  <div class="polecol" aria-hidden="true"><div class="pole"><span class="cap t"></span><div class="glass"><div class="stripes"></div></div><span class="cap b"></span></div></div>
+  <aside class="hside" aria-label="Disponibilité">
+    <span class="live mono" id="live"><i></i><span id="liveTxt">Horaires</span></span>
+    <div class="slotcard"><span class="mono">Prochain fauteuil libre</span><b id="nextT">--:--</b><span id="nextW">—</span></div>
+    <div class="chairs" id="chairs"></div>
+    <a class="btn green" href="#reserver" id="nextBtn">Prendre ce créneau <span class="arr">→</span></a>
+  </aside>
+  <div class="hpole stripes" aria-hidden="true"></div>
+</header>
+
+<div class="ticker" aria-hidden="true"><div class="tr" id="ticker"></div></div>
+
+<main class="wrap">
+  <section class="blk" id="carte">
+    <div class="sh"><span class="mono">Prix affichés, pas de surprise</span><h2>La <span class="out">carte</span></h2><p>Appuyez sur « Ajouter » pour mettre une prestation dans votre réservation.</p></div>
+    <div class="board">
+      <div class="hd"><b>BARBER 16 · TARIFS</b><span>Prix en dinars · durée indicative</span></div>
+      <div class="grps" id="board"></div>
+    </div>
+  </section>
+
+  <section class="blk" id="studio">
+    <div class="sh"><span class="mono">Avant / après</span><h2>Essayez <span class="out">votre coupe</span></h2><p>Choisissez une coupe et une barbe, puis glissez la barre pour comparer avec l'avant. Votre barbier saura exactement quoi faire.</p></div>
+    <div class="studio">
+      <div class="ba" id="ba" style="--x:50%">
+        <div class="bg"></div>
+        <div class="layer after" id="after"></div>
+        <div class="layer before" id="before"></div>
+        <span class="lab l">AVANT</span><span class="lab r">APRÈS</span>
+        <input type="range" id="baRange" min="0" max="100" value="50" aria-label="Comparer avant et après">
+        <span class="line"></span><span class="knob" aria-hidden="true">⇆</span>
+      </div>
+      <div class="ctrl">
+        <div><span class="lbl">Coupe</span><div class="opts" id="cuts"></div></div>
+        <div><span class="lbl">Barbe</span><div class="opts" id="beards"></div></div>
+        <div class="look"><span class="mono">Votre look</span><b id="lookName">—</b><span id="lookPrice">—</span></div>
+        <button class="btn" type="button" id="lookBtn">Réserver ce look <span class="arr">→</span></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk" id="barbiers">
+    <div class="sh"><span class="mono">3 fauteuils</span><h2>Les <span class="out">barbiers</span></h2></div>
+    <div class="barbers" id="barbers"></div>
+  </section>
+
+  <section class="blk" id="reserver">
+    <div class="sh"><span class="mono">1 minute</span><h2>Réservez <span class="out">votre fauteuil</span></h2><p>Votre ticket se remplit pendant que vous choisissez. Il part sur WhatsApp et le salon vous confirme.</p></div>
+    <div class="book">
+      <div class="steps">
+        <div class="step" id="s1"><h3><i>1</i>Prestations</h3><div class="svcs" id="svcs"></div></div>
+        <div class="step" id="s2"><h3><i>2</i>Barbier</h3><div class="who" id="who"></div></div>
+        <div class="step" id="s3"><h3><i>3</i>Jour</h3><div class="days" id="days"></div></div>
+        <div class="step" id="s4"><h3><i>4</i>Heure</h3><div class="slots" id="slots"></div><p class="hint" id="slotHint"></p></div>
+        <div class="step" id="s5"><h3><i>5</i>Vous</h3><div class="fg">
+          <label class="field"><span>Prénom et nom</span><input id="cName" autocomplete="name" placeholder="Ex. Anis Benali"></label>
+          <label class="field"><span>Téléphone</span><input id="cPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="05 / 06 / 07 …"></label>
+        </div></div>
+      </div>
+      <aside class="ticket" aria-live="polite">
+        <div class="tkw"><div class="tk" id="tk"></div></div>
+        <div class="act">
+          <p class="err" id="err" hidden></p>
+          <a class="btn wa" id="send" href="#" target="_blank" rel="noopener">Envoyer mon ticket sur WhatsApp <span class="arr">→</span></a>
+          <p class="small">Annulation gratuite jusqu'à 2 heures avant. Paiement au salon.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="sh"><span class="mono">Le salon</span><h2>Infos <span class="out">pratiques</span></h2></div>
+    <div class="info">
+      <div><h3>Horaires</h3><table class="hrs" id="hrs"></table></div>
+      <div><h3>Adresse</h3><p><b>24 rue Didouche Mourad, Alger-Centre</b><br>À 3 minutes du métro Tafourah – Grande Poste.</p><a class="btn green" href="https://www.google.com/maps/search/?api=1&query=rue+Didouche+Mourad+Alger" target="_blank" rel="noopener">Itinéraire <span class="arr">→</span></a></div>
+      <div><h3>Les règles</h3><ul class="rules"><li>Arrivez 5 minutes avant votre heure.</li><li>Après 10 minutes de retard, le créneau passe au suivant.</li><li>Sans rendez-vous ? Venez, on vous prend dès qu'un fauteuil se libère.</li></ul></div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="sh"><span class="mono">Questions</span><h2>FAQ</h2></div>
+    <div class="faq">
+      <details><summary>Je peux venir sans rendez-vous ?</summary><p>Oui. Les clients avec rendez-vous passent en premier, et on vous prend dès qu'un fauteuil se libère. Le rendez-vous vous évite d'attendre.</p></details>
+      <details><summary>Vous coupez les enfants ?</summary><p>Oui, dès 3 ans, avec un rehausseur. La coupe enfant (moins de 12 ans) est à 500 DA.</p></details>
+      <details><summary>Le pack marié, comment ça marche ?</summary><p>Coupe, barbe, soin du visage et rasage à la serviette chaude, la veille ou le jour J. On peut aussi venir chez vous avec le cortège (supplément selon le quartier).</p></details>
+      <details><summary>Quels produits utilisez-vous ?</summary><p>Lames à usage unique pour chaque client, serviettes lavées à haute température, et produits sans alcool pour les peaux sensibles.</p></details>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="band stripes" aria-hidden="true"></div>
+  <div class="giant" aria-hidden="true">BARBER <span>16</span></div>
+  <div class="fbar"><div class="in"><span>© Barber 16 · Site de démonstration</span><span>Site réalisé par <b>Nova Web Dz</b> · @nova_webdz</span></div></div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script>
+const WA="213561913869";
+const $=s=>document.querySelector(s);
+const pad=n=>String(n).padStart(2,"0");
+const fmt=n=>Math.round(n).toLocaleString("fr-FR").replace(/\s/g," ");
+const toM=t=>{const[h,m]=t.split(":").map(Number);return h*60+m};
+const hhmm=m=>pad(Math.floor(m/60))+":"+pad(m%60);
+const wa=t=>`https://wa.me/${WA}?text=${encodeURIComponent(t)}`;
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const DN=["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
+const D3=["Dim","Lun","Mar","Mer","Jeu","Ven","Sam"];
+const MON=["janv.","févr.","mars","avr.","mai","juin","juil.","août","sept.","oct.","nov.","déc."];
+const ORDER=[6,0,1,2,3,4,5];
+const HOURS={5:["14:00","20:00"]};[6,0,1,2,3,4].forEach(d=>HOURS[d]=["09:00","20:00"]);
+
+/* ---------- Data ---------- */
+const GROUPS=[
+ {n:"Coupes",items:[
+  {id:"classic",n:"Coupe classique",d:"Aux ciseaux, shampoing inclus",p:600,dur:30},
+  {id:"fade",n:"Dégradé / Fade",d:"Skin, low ou mid fade, finitions au rasoir",p:800,dur:30},
+  {id:"design",n:"Fade + trait",d:"Dégradé avec trait ou motif au rasoir",p:1000,dur:45},
+  {id:"kid",n:"Coupe enfant",d:"Moins de 12 ans",p:500,dur:30}]},
+ {n:"Barbe & soins",items:[
+  {id:"beard",n:"Taille de barbe",d:"Tondeuse, contours au rasoir",p:500,dur:20},
+  {id:"shave",n:"Rasage traditionnel",d:"Serviette chaude, mousse, rasoir",p:700,dur:30},
+  {id:"line",n:"Contours seuls",d:"Nuque, tempes et joues",p:300,dur:15},
+  {id:"face",n:"Soin visage",d:"Vapeur, gommage, masque noir",p:800,dur:30}]},
+ {n:"Packs",items:[
+  {id:"combo",n:"Coupe + barbe",d:"Le classique du salon",p:1200,dur:50,save:100},
+  {id:"dad",n:"Père & fils",d:"Coupe adulte + coupe enfant",p:1200,dur:60,save:100},
+  {id:"groom",n:"Pack marié",d:"Coupe, barbe, soin, rasage",p:3500,dur:120,save:300}]}
+];
+const SV={};GROUPS.forEach(g=>g.items.forEach(i=>SV[i.id]=i));
+const BARBERS=[
+ {id:"kamel",n:"Kamel",role:"Le patron",since:"Depuis 1998",d:"25 ans de ciseaux. Coupes classiques, raies nettes et rasage à l'ancienne.",sk:["Classique","Rasage","Ciseaux"]},
+ {id:"mehdi",n:"Mehdi",role:"Fades & designs",since:"Depuis 2016",d:"Le spécialiste des skin fades et des traits au rasoir. Précis au millimètre.",sk:["Skin fade","Traits","Mid fade"]},
+ {id:"rayan",n:"Rayan",role:"Barbe & soins",since:"Depuis 2019",d:"Barbes taillées, contours propres et soins du visage pour une peau nette.",sk:["Barbe","Soin visage","Contours"]}
+];
+
+/* ---------- Avail (demo) ---------- */
+function hash(s){let h=2166136261;for(const c of s)h=Math.imul(h^c.charCodeAt(0),16777619)>>>0;return h}
+function busy(b,k,m){return hash(b+k+m)%10<3}
+function key(d){return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())}
+function freeFor(b,k,start,need,close){for(let i=0;i<need;i++){const m=start+30*i;if(m+30>close||busy(b,k,m))return false}return true}
+function whoFree(barber,k,start,need,close){const list=barber==="any"?BARBERS.map(x=>x.id):[barber];return list.find(b=>freeFor(b,k,start,need,close))||null}
+
+/* ---------- Status + next slot ---------- */
+function status(){
+  const n=new Date(),d=n.getDay(),m=n.getHours()*60+n.getMinutes(),h=HOURS[d];
+  const open=m>=toM(h[0])&&m<toM(h[1]);
+  $("#live").classList.toggle("closed",!open);
+  let t;
+  if(open)t=`Ouvert · ferme à ${h[1]}`;
+  else if(m<toM(h[0]))t=`Fermé · ouvre à ${h[0]}`;
+  else{const nd=(d+1)%7;t=`Fermé · ouvre ${DN[nd].toLowerCase()} à ${HOURS[nd][0]}`}
+  $("#liveTxt").textContent=t;
+  // chairs now
+  const k=key(n),slot=Math.floor(m/30)*30;
+  $("#chairs").innerHTML=BARBERS.map(b=>{const occ=open&&busy(b.id,k,slot);return `<div class="chair ${open?(occ?"busy":""):"busy"}"><b>${b.n}</b><span><i class="st"></i>${!open?"Fermé":occ?"En coupe":"Libre"}</span></div>`}).join("");
+}
+function nextSlot(){
+  const n=new Date(),nowM=n.getHours()*60+n.getMinutes();
+  for(let k=0;k<8;k++){
+    const d=new Date(n);d.setDate(n.getDate()+k);const dk=key(d),h=HOURS[d.getDay()],o=toM(h[0]),c=toM(h[1]);
+    for(let m=o;m+30<=c;m+=30){
+      if(k===0&&m<=nowM+15)continue;
+      const b=whoFree("any",dk,m,1,c);
+      if(b){$("#nextT").textContent=hhmm(m);$("#nextW").textContent=`${k===0?"Aujourd'hui":k===1?"Demain":DN[d.getDay()]} · avec ${BARBERS.find(x=>x.id===b).n}`;
+        $("#nextBtn").dataset.k=dk;$("#nextBtn").dataset.m=m;$("#nextBtn").dataset.b=b;return}
+    }
+  }
+}
+
+/* ---------- Board ---------- */
+const sel=new Set(["fade"]);
+function renderBoard(){
+  $("#board").innerHTML=GROUPS.map(g=>`<div class="grp"><h3>${g.n}</h3>${g.items.map(i=>`
+    <div class="it"><div class="nm"><b>${i.n}</b></div><span class="pr">${fmt(i.p)}<small>DA</small></span>
+    <span class="ds">${i.d} · <em>${i.dur} min</em>${i.save?`<span class="save">-${i.save} DA</span>`:""}</span>
+    <button type="button" class="add" data-svc="${i.id}" aria-pressed="${sel.has(i.id)}">${sel.has(i.id)?"✓ Ajouté":"+ Ajouter"}</button></div>`).join("")}</div>`).join("");
+}
+
+/* ---------- Head illustration ---------- */
+const CUTS=[{id:"skin",n:"Skin fade",d:"Côtés à blanc",svc:"fade"},{id:"low",n:"Low fade",d:"Dégradé bas",svc:"fade"},{id:"taper",n:"Taper",d:"Nuque et tempes",svc:"fade"},{id:"buzz",n:"Buzz cut",d:"Ras partout",svc:"classic"},{id:"classic",n:"Classique",d:"Raie sur le côté",svc:"classic"}];
+const BEARDS=[{id:"rase",n:"Rasé",d:"Peau nette",svc:"shave"},{id:"courte",n:"Courte",d:"Barbe de 3 jours",svc:"beard"},{id:"taillee",n:"Taillée",d:"Contours nets",svc:"beard"},{id:"longue",n:"Longue",d:"Barbe pleine",svc:"beard"}];
+const look={cut:"skin",beard:"taillee"};
+function head(cut,beard,id){
+  const SK="#C68A63",SK2="#A86E4C",INK="#16130F",H="#1F1712",G="#123B2E";
+  const fades={skin:[[0,.95],[.38,.4],[.7,0]],low:[[0,.95],[.6,.8],[1,.18]],taper:[[0,.95],[.85,.9],[1,.5]],buzz:[[0,.72],[1,.62]],classic:[[0,.97],[1,.85]],before:[[0,1],[1,1]]};
+  const st=fades[cut].map(([o,a])=>`<stop offset="${o}" stop-color="${H}" stop-opacity="${a}"/>`).join("");
+  const L="M90 168 L88 136 C88 112 94 98 105 88 L118 92 C109 104 105 118 105 136 L107 168 Z";
+  const R="M210 168 L212 136 C212 112 206 98 195 88 L182 92 C191 104 195 118 195 136 L193 168 Z";
+  const tops={
+    skin:`<path d="M96 106 C94 70 118 46 150 46 C184 46 206 70 204 106 C196 98 186 93 176 95 L170 86 L162 96 L152 85 L144 96 L134 86 L128 97 C116 93 104 98 96 106 Z" fill="${H}" stroke="${INK}" stroke-width="3" stroke-linejoin="round"/>`,
+    buzz:`<path d="M93 116 C91 78 116 55 150 55 C184 55 209 78 207 116 C196 102 176 97 150 97 C124 97 104 102 93 116 Z" fill="${H}" fill-opacity=".72" stroke="${INK}" stroke-width="3"/>`,
+    classic:`<path d="M92 122 C82 74 114 38 154 38 C194 38 220 72 208 120 C202 104 190 97 176 96 C160 95 146 99 136 104 L128 70 C118 86 102 102 92 122 Z" fill="${H}" stroke="${INK}" stroke-width="3" stroke-linejoin="round"/><path d="M130 70 C150 58 184 60 198 78" fill="none" stroke="#3A2C22" stroke-width="2"/>`,
+    before:`<path d="M74 172 C56 142 62 98 86 76 C94 44 128 28 156 32 C192 30 224 52 228 90 C246 118 240 152 226 174 C220 152 212 140 205 136 C203 114 194 102 180 99 L171 110 L163 97 L154 110 L146 97 L136 110 L128 99 C112 101 100 114 96 134 C88 140 80 152 74 172 Z" fill="${H}" stroke="${INK}" stroke-width="3" stroke-linejoin="round"/><path d="M90 70 C80 60 72 58 64 62 M200 52 C210 40 222 38 230 44 M150 32 C152 22 160 16 168 16" fill="none" stroke="${INK}" stroke-width="3" stroke-linecap="round"/>`
+  };
+  tops.low=tops.skin;tops.taper=tops.skin;
+  const beards={
+    rase:`<path d="M98 176 C104 214 124 242 150 248 C176 242 196 214 202 176 C190 200 172 214 150 216 C128 214 110 200 98 176 Z" fill="${H}" fill-opacity=".1"/>`,
+    courte:`<path d="M93 156 C94 204 114 240 150 252 C186 240 206 204 207 156 C200 182 190 198 176 207 C166 213 158 215 150 215 C142 215 134 213 124 207 C110 198 100 182 93 156 Z" fill="${H}" fill-opacity=".42"/><path d="M127 197 C137 190 163 190 173 197 C166 201 157 200 150 197 C143 200 134 201 127 197 Z" fill="${H}" fill-opacity=".5"/>`,
+    taillee:`<path d="M91 150 L98 150 C100 182 110 200 124 208 C134 214 142 216 150 216 C158 216 166 214 176 208 C190 200 200 182 202 150 L209 150 C209 206 189 244 150 255 C111 244 91 206 91 150 Z" fill="${H}" stroke="${INK}" stroke-width="2.5" stroke-linejoin="round"/><path d="M125 198 C136 188 164 188 175 198 C167 203 157 202 150 198 C143 202 133 203 125 198 Z" fill="${H}" stroke="${INK}" stroke-width="2"/>`,
+    longue:`<path d="M89 148 L97 148 C99 182 110 200 124 208 C134 214 142 216 150 216 C158 216 166 214 176 208 C190 200 201 182 203 148 L211 148 C215 222 196 288 150 300 C104 288 85 222 89 148 Z" fill="${H}" stroke="${INK}" stroke-width="2.5" stroke-linejoin="round"/><path d="M124 198 C135 187 165 187 176 198 C168 204 157 203 150 198 C143 203 132 204 124 198 Z" fill="${H}" stroke="${INK}" stroke-width="2"/>`,
+    before:`<path d="M88 150 C84 196 98 262 126 286 C134 296 144 290 150 298 C158 288 168 296 176 284 C204 260 216 196 212 150 C204 182 194 200 178 208 C166 214 158 216 150 216 C142 216 134 214 122 208 C106 200 96 182 88 150 Z" fill="#2A2019" fill-opacity=".85" stroke="${INK}" stroke-width="2.5" stroke-linejoin="round"/><path d="M123 199 C133 186 167 186 177 199 C169 205 158 203 150 199 C142 203 131 205 123 199 Z" fill="#2A2019" stroke="${INK}" stroke-width="2"/><path d="M110 240 l-6 10 M190 238 l6 10 M150 262 l0 12" stroke="${INK}" stroke-width="2.5" stroke-linecap="round"/>`
+  };
+  const sides=cut==="before"?"":`<path d="${L}" fill="url(#f${id})"/><path d="${R}" fill="url(#f${id})"/>`;
+  return `<svg viewBox="0 0 300 330" role="img" aria-label="Illustration ${cut==="before"?"avant":"après"}">
+  <defs><linearGradient id="f${id}" x1="0" y1="0" x2="0" y2="1">${st}</linearGradient></defs>
+  <path d="M34 330 C40 284 88 262 150 262 C212 262 260 284 266 330 Z" fill="${G}" stroke="${INK}" stroke-width="3"/>
+  <path d="M60 330 C66 300 90 284 112 278 M240 330 C234 300 210 284 188 278" fill="none" stroke="#2E6B56" stroke-width="2"/>
+  <path d="M126 222 L126 268 L174 268 L174 222 Z" fill="${SK2}" stroke="${INK}" stroke-width="3"/>
+  <path d="M114 266 C128 258 172 258 186 266 L182 280 C168 272 132 272 118 280 Z" fill="#FBF6EC" stroke="${INK}" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="88" cy="150" rx="11" ry="19" fill="${SK}" stroke="${INK}" stroke-width="3"/>
+  <ellipse cx="212" cy="150" rx="11" ry="19" fill="${SK}" stroke="${INK}" stroke-width="3"/>
+  <path d="M150 62 C108 62 88 92 88 135 C88 176 98 210 118 232 C130 245 140 250 150 250 C160 250 170 245 182 232 C202 210 212 176 212 135 C212 92 192 62 150 62 Z" fill="${SK}" stroke="${INK}" stroke-width="3"/>
+  ${sides}
+  ${beards[beard]}
+  <rect x="110" y="126" width="29" height="7" fill="${INK}" transform="rotate(${cut==="before"?6:-4} 124 129)"/>
+  <rect x="161" y="126" width="29" height="7" fill="${INK}" transform="rotate(${cut==="before"?-6:4} 176 129)"/>
+  <ellipse cx="125" cy="148" rx="4.5" ry="${cut==="before"?2:4.5}" fill="${INK}"/><ellipse cx="175" cy="148" rx="4.5" ry="${cut==="before"?2:4.5}" fill="${INK}"/>
+  <path d="M150 150 L143 180 L155 182" fill="none" stroke="${INK}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="${cut==="before"?"M138 208 Q150 204 162 208":"M136 206 Q150 214 164 206"}" fill="none" stroke="${INK}" stroke-width="3" stroke-linecap="round"/>
+  ${tops[cut]}
+  </svg>`;
+}
+function renderStudio(){
+  $("#cuts").innerHTML=CUTS.map(c=>`<button type="button" data-cut="${c.id}" aria-pressed="${look.cut===c.id}"><b>${c.n}</b><span>${c.d}</span></button>`).join("");
+  $("#beards").innerHTML=BEARDS.map(c=>`<button type="button" data-beard="${c.id}" aria-pressed="${look.beard===c.id}"><b>${c.n}</b><span>${c.d}</span></button>`).join("");
+  const a=$("#after");a.innerHTML=head(look.cut,look.beard,"a");a.classList.remove("svgfade");void a.offsetWidth;a.classList.add("svgfade");
+  const c=CUTS.find(x=>x.id===look.cut),b=BEARDS.find(x=>x.id===look.beard);
+  const svcs=lookSvcs();const p=svcs.reduce((s,id)=>s+SV[id].p,0),dur=svcs.reduce((s,id)=>s+SV[id].dur,0);
+  $("#lookName").textContent=`${c.n} + barbe ${b.n.toLowerCase()}`;
+  $("#lookPrice").textContent=`${svcs.map(id=>SV[id].n).join(" + ")} · ${fmt(p)} DA · ${dur} min`;
+}
+function lookSvcs(){
+  const c=CUTS.find(x=>x.id===look.cut).svc,b=BEARDS.find(x=>x.id===look.beard).svc;
+  if(c==="fade"&&b==="beard")return["combo"];
+  return [c,b];
+}
+
+/* ---------- Barbers ---------- */
+function renderBarbers(){
+  $("#barbers").innerHTML=BARBERS.map(b=>`<article class="bcard"><div class="top stripes"></div>
+    <div class="mg"><b>${b.n[0]}</b><span>${b.role}<br>${b.since}</span></div>
+    <div class="tx"><h3>${b.n}</h3><p>${b.d}</p><div class="sk">${b.sk.map(s=>`<span>${s}</span>`).join("")}</div>
+    <a class="btn" href="#reserver" data-pickb="${b.id}">Réserver avec ${b.n}</a></div></article>`).join("");
+}
+
+/* ---------- Booking ---------- */
+const bk={barber:"any",day:null,time:null};
+function need(){const dur=[...sel].reduce((s,id)=>s+SV[id].dur,0);return Math.max(1,Math.ceil(dur/30))}
+function days(){const o=[],n=new Date();for(let k=0;k<7;k++){const d=new Date(n);d.setDate(n.getDate()+k);o.push(d)}return o}
+function renderSvcs(){$("#svcs").innerHTML=Object.values(SV).map(s=>`<button type="button" data-svc="${s.id}" aria-pressed="${sel.has(s.id)}">${s.n}<small>${fmt(s.p)} DA</small></button>`).join("")}
+function renderWho(){$("#who").innerHTML=[{id:"any",n:"Peu importe",role:"Le 1er libre"},...BARBERS].map(b=>`<button type="button" data-who="${b.id}" aria-pressed="${bk.barber===b.id}"><b>${b.id==="any"?"Libre":b.n}</b><span>${b.role}</span></button>`).join("")}
+function dayHasFree(d){const k=key(d),h=HOURS[d.getDay()],o=toM(h[0]),c=toM(h[1]),n=new Date(),isT=k===key(n),nowM=n.getHours()*60+n.getMinutes(),nd=need();
+  for(let m=o;m+30*nd<=c;m+=30){if(isT&&m<=nowM+15)continue;if(whoFree(bk.barber,k,m,nd,c))return true}return false}
+function renderDays(){
+  if(!bk.day){const f=days().find(dayHasFree);bk.day=key(f||days()[0])}
+  $("#days").innerHTML=days().map((d,i)=>`<button type="button" data-day="${key(d)}" aria-pressed="${bk.day===key(d)}"><small>${i===0?"Auj.":D3[d.getDay()]}</small><b>${d.getDate()}</b><span>${d.getDay()===5?"14h–20h":MON[d.getMonth()]}</span></button>`).join("");
+}
+function renderSlots(){
+  const d=new Date(bk.day+"T00:00"),h=HOURS[d.getDay()],o=toM(h[0]),c=toM(h[1]),nd=need();
+  const n=new Date(),isToday=bk.day===key(n),nowM=n.getHours()*60+n.getMinutes();
+  let html="",any=0;
+  for(let m=o;m+30*nd<=c;m+=30){
+    const past=isToday&&m<=nowM+15;
+    const b=past?null:whoFree(bk.barber,bk.day,m,nd,c);
+    if(b)any++;
+    if(bk.time===m&&!b)bk.time=null;
+    html+=`<button type="button" data-time="${m}" aria-pressed="${bk.time===m}" ${b?"":"disabled"}>${hhmm(m)}</button>`;
+  }
+  $("#slots").innerHTML=any?html:`<p class="hint" style="grid-column:1/-1">Plus de créneau libre ce jour-là. Choisissez un autre jour ou « Peu importe ».</p>`;
+  $("#slotHint").textContent=any?`Durée réservée : ${nd*30} min · les heures barrées sont prises`:"";
+}
+function ticketNo(){return 1000+hash(bk.day+bk.time+bk.barber)%9000}
+function assigned(){
+  if(bk.time===null)return null;
+  const d=new Date(bk.day+"T00:00"),c=toM(HOURS[d.getDay()][1]);
+  return whoFree(bk.barber,bk.day,bk.time,need(),c);
+}
+function renderTicket(printAnim){
+  const items=[...sel].map(id=>SV[id]),total=items.reduce((s,i)=>s+i.p,0),dur=items.reduce((s,i)=>s+i.dur,0);
+  const d=new Date(bk.day+"T00:00"),ab=assigned(),bn=ab?BARBERS.find(x=>x.id===ab).n:(bk.barber==="any"?"Le 1er libre":BARBERS.find(x=>x.id===bk.barber).n);
+  const tk=$("#tk");
+  tk.innerHTML=`<div class="h"><b>BARBER <span>16</span></b><span>24 rue Didouche Mourad · Alger</span></div>
+    <div class="no"><span>TICKET</span><b>N° ${bk.time!==null?ticketNo():"----"}</b></div>
+    ${items.length?`<ul>${items.map(i=>`<li><span>${i.n}</span><span>${fmt(i.p)}</span></li>`).join("")}</ul>`:`<div class="empty">Choisissez au moins une prestation.</div>`}
+    <dl class="meta"><dt>Barbier</dt><dd>${bn}</dd><dt>Date</dt><dd>${DN[d.getDay()]} ${d.getDate()} ${MON[d.getMonth()]}</dd><dt>Heure</dt><dd>${bk.time!==null?hhmm(bk.time):"--:--"}</dd><dt>Durée</dt><dd>${dur} min</dd></dl>
+    <div class="tot"><span>TOTAL DA</span><b>${fmt(total)}</b></div><div class="bars"></div>`;
+  if(printAnim&&!reduce){tk.classList.remove("print");void tk.offsetWidth;tk.classList.add("print")}
+  ["s1","s2","s3","s4","s5"].forEach((s,i)=>$("#"+s).classList.toggle("ok",[items.length>0,true,!!bk.day,bk.time!==null,$("#cName").value.trim().length>1][i]));
+  buildLink(items,total,dur,bn,d);
+}
+function buildLink(items,total,dur,bn,d){
+  const name=$("#cName").value.trim(),phone=$("#cPhone").value.trim();
+  let m=`Salam Barber 16 💈\nRéservation · Ticket N° ${bk.time!==null?ticketNo():"—"}\n${items.map(i=>`• ${i.n} — ${fmt(i.p)} DA`).join("\n")}\nTotal : ${fmt(total)} DA (${dur} min)\nBarbier : ${bn}\nDate : ${DN[d.getDay()]} ${d.getDate()} ${MON[d.getMonth()]}${bk.time!==null?" à "+hhmm(bk.time):""}\n`;
+  if(styleNote)m+=`Look souhaité : ${styleNote}\n`;
+  if(name)m+=`Nom : ${name}\n`;if(phone)m+=`Téléphone : ${phone}\n`;
+  $("#send").href=wa(m);
+}
+let styleNote="";
+function refreshBooking(print){renderSvcs();renderWho();renderDays();renderSlots();renderTicket(print)}
+
+/* ---------- Status table ---------- */
+function renderHours(){const d=new Date().getDay();$("#hrs").innerHTML=ORDER.map(k=>`<tr class="${k===d?"today":""}"><td>${DN[k]}</td><td>${HOURS[k].join(" – ")}</td></tr>`).join("")}
+
+/* ---------- Events ---------- */
+document.addEventListener("click",e=>{
+  const s=e.target.closest("[data-svc]");
+  if(s){const id=s.dataset.svc;sel.has(id)?sel.delete(id):sel.add(id);renderBoard();refreshBooking(true);s.classList.add("pop");return}
+  const c=e.target.closest("[data-cut]");if(c){look.cut=c.dataset.cut;renderStudio();return}
+  const b=e.target.closest("[data-beard]");if(b){look.beard=b.dataset.beard;renderStudio();return}
+  const w=e.target.closest("[data-who]");if(w){bk.barber=w.dataset.who;refreshBooking(true);return}
+  const pb=e.target.closest("[data-pickb]");if(pb){bk.barber=pb.dataset.pickb;refreshBooking(true)}
+  const dy=e.target.closest("[data-day]");if(dy){bk.day=dy.dataset.day;bk.time=null;refreshBooking(true);return}
+  const t=e.target.closest("[data-time]");if(t&&!t.disabled){bk.time=+t.dataset.time;renderSlots();renderTicket(true);return}
+  if(e.target.closest("#nextBtn")){const nb=$("#nextBtn");if(nb.dataset.k){bk.day=nb.dataset.k;bk.barber=nb.dataset.b;bk.time=+nb.dataset.m;refreshBooking(true)}}
+  if(e.target.closest("#lookBtn")){
+    sel.clear();lookSvcs().forEach(id=>sel.add(id));
+    styleNote=$("#lookName").textContent;renderBoard();refreshBooking(true);goTo("#reserver");return}
+});
+["#cName","#cPhone"].forEach(s=>$(s).addEventListener("input",()=>renderTicket(false)));
+$("#send").addEventListener("click",e=>{
+  const err=$("#err"),phone=$("#cPhone").value.replace(/[\s.-]/g,"").replace(/^\+213/,"0");let m="";
+  if(!sel.size)m="Choisissez au moins une prestation (étape 1).";
+  else if(bk.time===null)m="Choisissez une heure (étape 4).";
+  else if($("#cName").value.trim().length<2)m="Indiquez votre prénom et nom.";
+  else if(!/^0[567]\d{8}$/.test(phone))m="Entrez un numéro de mobile valide (10 chiffres, commençant par 05, 06 ou 07).";
+  if(m){e.preventDefault();err.textContent=m;err.hidden=false;return}
+  err.hidden=true;
+});
+/* before/after slider */
+const ba=$("#ba"),rng=$("#baRange");
+rng.addEventListener("input",()=>ba.style.setProperty("--x",rng.value+"%"));
+
+/* ---------- Init ---------- */
+(function(){const w=["Skin fade","Barbe taillée","Rasage serviette chaude","Coupe enfant","Pack marié","Sans attente"].map(x=>`<span>${x}</span>`).join("");$("#ticker").innerHTML=w+w})();
+$("#before").innerHTML=head("before","before","b");
+renderBoard();renderStudio();renderBarbers();renderHours();status();nextSlot();refreshBooking(false);
+setInterval(()=>{status();nextSlot()},30000);
+// demo sweep of the before/after slider once it is seen
+if(!reduce&&"IntersectionObserver" in window){
+  const io=new IntersectionObserver(es=>{if(!es[0].isIntersecting)return;io.disconnect();
+    const t0=performance.now();const step=t=>{const k=Math.min(1,(t-t0)/1600);const v=50+Math.sin(k*Math.PI*2)*30*(1-k);rng.value=v;ba.style.setProperty("--x",v+"%");if(k<1)requestAnimationFrame(step)};requestAnimationFrame(step)},{threshold:.5});
+  io.observe(ba);
+}
+
+/* ---------- Lenis ---------- */
+let lenis=null;
+if(!reduce&&typeof Lenis!=="undefined"){lenis=new Lenis({duration:1.15,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true});const raf=t=>{lenis.raf(t);requestAnimationFrame(raf)};requestAnimationFrame(raf)}
+function goTo(sel){const el=document.querySelector(sel);if(!el)return;if(lenis)lenis.scrollTo(el,{offset:-84});else scrollTo({top:el.getBoundingClientRect().top+scrollY-84,behavior:reduce?"auto":"smooth"})}
+document.addEventListener("click",e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const id=a.getAttribute("href");if(id.length<2||!document.querySelector(id))return;e.preventDefault();goTo(id)});
+</script>
+
+</body>
+</html>
